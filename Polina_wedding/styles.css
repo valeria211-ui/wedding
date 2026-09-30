@@ -1,0 +1,2905 @@
+@font-face {
+  font-family: "Marianna";
+  src: url("./assets/fonts/marianna.ttf")
+    format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Heather Script One";
+  src: url("./assets/fonts/heather-script-one.ttf")
+    format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ekaterina Velikaya One";
+  src: url("./assets/fonts/ekaterina-velikaya-one.ttf")
+    format("truetype");
+  font-display: swap;
+}
+
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+:root {
+  --navy: #122f57;
+  --blue: #546b87;
+  --slate: #445262;
+  --pale: #bccbe0;
+  --ivory: #f9f7f2;
+  --white: #ffffff;
+
+  --body-font:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  --label-font:
+    "Lora",
+    Georgia,
+    serif;
+
+  --script-font:
+    "Marianna",
+    "Segoe Script",
+    cursive;
+
+  --countdown-font:
+    "Heather Script One",
+    "Segoe Script",
+    cursive;
+
+  --date-font:
+    "Ekaterina Velikaya One",
+    "Segoe Script",
+    cursive;
+
+  --inspiration-font:
+    "Great Vibes",
+    "Segoe Script",
+    cursive;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background: #dfe4e8;
+  color: var(--navy);
+  font-family: var(--body-font);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+p,
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.invitation {
+  position: relative;
+
+  width: min(
+    100%,
+    390px
+  );
+
+  margin: 0 auto;
+
+  overflow: hidden;
+
+  background:
+    var(--ivory);
+
+  box-shadow:
+    0 18px 60px
+    rgba(18, 47, 87, .16);
+}
+
+
+/* =========================================================
+   INITIAL STATE
+   ========================================================= */
+
+.js
+.invitation:not(.is-open) {
+  height: 100dvh;
+  height: 100vh;
+  min-height: 640px;
+}
+
+.js
+.invitation:not(.is-open)
+> :not(.envelope) {
+  display: none;
+}
+
+.js
+.invitation.is-open
+.envelope {
+  display: none;
+}
+
+
+/* =========================================================
+   COMMON
+   ========================================================= */
+
+.section-light {
+  background:
+    var(--ivory);
+}
+
+.section-blue {
+  color:
+    var(--white);
+
+  background:
+    var(--blue);
+}
+
+.section-pale {
+  background:
+    var(--pale);
+}
+
+.script-title {
+  color:
+    var(--blue);
+
+  font-family:
+    var(--script-font);
+
+  font-weight: 400;
+
+  line-height: 1.15;
+}
+
+.script-subtitle {
+  font-family:
+    var(--script-font);
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   ENVELOPE — простое и быстрое открытие
+   ========================================================= */
+
+.envelope {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 640px;
+  padding: 0;
+  border: 0;
+  background: url("./assets/envelope.png") center center / cover no-repeat;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Никаких дополнительных листов и клапанов: показываем один экран. */
+.envelope::before,
+.envelope::after {
+  display: none;
+}
+
+/* Во время открытия сразу показываем первую страницу приглашения. */
+.js .invitation.is-opening > .cover {
+  display: block;
+  visibility: visible;
+  opacity: 0;
+  transform: scale(.99);
+  animation: cover-open-fast 520ms cubic-bezier(.2,.75,.2,1) 80ms both;
+}
+
+.invitation.is-opening .envelope {
+  pointer-events: none;
+  animation: envelope-open-fast 420ms ease-out both;
+}
+
+@keyframes envelope-open-fast {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+}
+
+@keyframes cover-open-fast {
+  0% {
+    opacity: 0;
+    transform: scale(.99);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* =========================================================
+   COVER
+   ========================================================= */
+
+.cover {
+  position: relative;
+
+  height: 720px;
+
+  overflow: hidden;
+
+  background:
+    var(--ivory);
+
+  text-align: center;
+}
+
+
+.cover > .crest {
+  position: absolute;
+
+  top: 12px;
+  left: 50%;
+
+  width: 130px;
+  height: 133px;
+
+  transform:
+    translateX(-50%);
+}
+
+
+.cover-lead {
+  position: absolute;
+
+  top: 180px;
+  left: 24%;
+
+  width: 224px;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    var(--slate);
+
+  font-size: 18px;
+
+  line-height: 1.2;
+}
+
+
+.cover-photo-wrap {
+  position: absolute;
+
+  top: 274px;
+  left: 0;
+
+  width: 100%;
+  height: 446px;
+}
+
+
+.cover-photo {
+  width: 100%;
+  height: 446px;
+
+  object-fit: cover;
+}
+
+
+.cover-name {
+  position: absolute;
+
+  left: 7%;
+
+  width: 86%;
+
+  color:
+    var(--white);
+
+  font-family:
+    var(--script-font);
+
+  font-size:
+    clamp(
+      42px,
+      12.3vw,
+      48px
+    );
+
+  font-weight: 400;
+
+  line-height: .4;
+
+  text-align: center;
+
+  transform-origin:
+    center;
+}
+
+
+.cover-name-groom {
+  top: 20px;
+
+  letter-spacing:
+    7px;
+}
+
+
+.cover-amp {
+  position: absolute;
+
+  top: 79px;
+
+  left: 45%;
+
+  width: 48px;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    var(--white);
+
+  font-family:
+    var(--countdown-font);
+
+  font-size: 32px;
+
+  line-height: 1;
+
+  letter-spacing:
+    5px;
+}
+
+
+.cover-name-bride {
+  top: 111px;
+
+  letter-spacing:
+    7px;
+}
+
+
+/* COVER ENTRANCE */
+
+.cover-motion {
+  opacity: 0;
+
+  transform:
+    translate3d(
+      0,
+      22px,
+      0
+    );
+
+  transition:
+    opacity
+    900ms
+    cubic-bezier(
+      .2,
+      .72,
+      .18,
+      1
+    )
+    var(--delay),
+
+    transform
+    1000ms
+    cubic-bezier(
+      .2,
+      .72,
+      .18,
+      1
+    )
+    var(--delay);
+}
+
+
+.cover-entered
+.cover-motion {
+  opacity: 1;
+
+  transform:
+    translate3d(
+      0,
+      0,
+      0
+    );
+}
+
+
+/* =========================================================
+   WELCOME
+   ========================================================= */
+
+.welcome {
+  min-height: 465px;
+
+  padding:
+    35px 40px 0;
+
+  color:
+    var(--slate);
+
+  text-align:
+    center;
+}
+
+
+.welcome .script-title {
+  margin-bottom:
+    18px;
+
+  font-size:
+    48px;
+}
+
+
+.welcome p {
+  font-size:
+    18px;
+
+  line-height:
+    1.2;
+}
+
+
+.welcome p + p {
+  margin-top:
+    24px;
+}
+
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+.date-location {
+  position: relative;
+
+  min-height:
+    565px;
+
+  text-align:
+    center;
+}
+
+
+.date-line {
+  position: absolute;
+
+  inset: 0;
+
+  font-family:
+    var(--label-font);
+
+  font-size:
+    15px;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    1.4px;
+
+  text-transform:
+    uppercase;
+}
+
+
+.date-line::before,
+.date-line::after {
+  content: "";
+
+  position: absolute;
+
+  top: 40px;
+
+  width: 1px;
+
+  height: 72px;
+
+  background:
+    #a2b5cf;
+}
+
+
+.date-line::before {
+  left:
+    40%;
+}
+
+
+.date-line::after {
+  left:
+    60%;
+}
+
+
+.date-line span {
+  position: absolute;
+
+  top: 70px;
+
+  height: 20px;
+
+  line-height:
+    1.2;
+}
+
+
+.date-line span:first-child {
+  left:
+    11%;
+
+  width:
+    26%;
+}
+
+
+.date-line span:last-child {
+  right:
+    8%;
+
+  width:
+    27%;
+}
+
+
+.date-line strong {
+  position: absolute;
+
+  top: -30px;
+
+  left: 50%;
+
+  width: 61px;
+  height: 126px;
+
+  transform:
+    translateX(-50%);
+
+  font-family:
+    var(--date-font);
+
+  font-size:
+    64px;
+
+  font-weight:
+    400;
+
+  line-height:
+    1;
+}
+
+
+.gathering {
+  position: absolute;
+
+  top: 145px;
+  left: 25%;
+
+  width: 200px;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    var(--white);
+
+  font-size:
+    36px;
+}
+
+
+.location-copy {
+  position: absolute;
+
+  top: 200px;
+  left: 15%;
+
+  width: 264px;
+
+  transform:
+    translateX(-50%);
+
+  font-size:
+    18px;
+
+  line-height:
+    1.2;
+}
+
+
+.venue {
+  position: absolute;
+
+  top: 291px;
+  left: 50%;
+
+  width: 286px;
+  height: 161px;
+
+  transform:
+    translateX(-50%);
+
+  object-fit:
+    contain;
+}
+
+
+.outline-button {
+  position: absolute;
+
+  top: 486px;
+  left: 25%;
+
+  display:
+    flex;
+
+  width:
+    210px;
+
+  height:
+    42px;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  transform:
+    translateX(-50%);
+
+  border:
+    1px solid var(--white);
+
+  color:
+    var(--white);
+
+  font-family:
+    var(--label-font);
+
+  font-size:
+    12px;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    1.2px;
+
+  text-decoration:
+    none;
+
+  text-transform:
+    uppercase;
+
+  transition:
+    .25s ease;
+}
+
+
+.outline-button:hover {
+  color:
+    var(--blue);
+
+  background:
+    var(--white);
+}
+
+
+/* =========================================================
+   PROGRAM
+   ========================================================= */
+
+.program {
+  position: relative;
+
+  height:
+    750px;
+
+  overflow:
+    hidden;
+
+  padding:
+    0;
+}
+
+
+.program-title {
+  position: absolute;
+
+  z-index:
+    3;
+
+  top:
+    42px;
+
+  left:
+    50%;
+
+  width:
+    92%;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    var(--blue);
+
+  font-family:
+    var(--date-font);
+
+  font-size:
+    29px;
+
+  line-height:
+    1.22;
+
+  text-align:
+    center;
+}
+
+
+.program-list {
+  position: absolute;
+
+  z-index: 2;
+
+  top: 192px;
+
+  left: 40px;
+  right: 27px;
+
+  display: grid;
+
+  row-gap: 15px;
+}
+
+
+.program-item {
+  position: relative;
+
+  z-index:
+    2;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    81px 1fr;
+
+  column-gap:
+    18px;
+
+  align-items:
+    center;
+
+  width:
+    100%;
+}
+
+
+.program-item:nth-child(1) {
+  height: 78px;
+}
+
+
+.program-item:nth-child(2) {
+  height: 82px;
+}
+
+
+.program-dinner {
+  height: 89px;
+}
+
+
+/* 23:00 */
+
+.program-final {
+  height: 102px;
+
+  align-items:
+    start;
+}
+
+
+.program-item h3 {
+  color:
+    var(--blue);
+
+  font-size:
+    32px;
+
+  line-height:
+    1.2;
+}
+
+
+.program-item p {
+  color:
+    var(--navy);
+
+  font-size:
+    13px;
+
+  line-height:
+    1.2;
+}
+
+
+/* картинки */
+
+.program-item img {
+  opacity: 0;
+
+  transform:
+    translateX(-90px)
+    scale(.92);
+}
+
+
+.program-item div {
+  opacity: 0;
+
+  transform:
+    translateX(45px);
+}
+
+
+.reveal.is-visible
+.program-item img {
+  opacity: 1;
+
+  transform:
+    translateX(0)
+    scale(1);
+
+  transition:
+    opacity
+    .75s
+    ease
+    var(--delay),
+
+    transform
+    .9s
+    cubic-bezier(
+      .2,
+      .8,
+      .18,
+      1
+    )
+    var(--delay);
+}
+
+
+.reveal.is-visible
+.program-item div {
+  opacity: 1;
+
+  transform:
+    translateX(0);
+
+  transition:
+    opacity
+    .75s
+    ease
+    calc(var(--delay) + 120ms),
+
+    transform
+    .9s
+    cubic-bezier(
+      .2,
+      .8,
+      .18,
+      1
+    )
+    calc(var(--delay) + 120ms);
+}
+
+
+/* Ёлки */
+
+.program-forest {
+  position: absolute;
+
+  z-index:
+    1;
+
+  bottom:
+    0;
+
+  left:
+    0;
+
+  width:
+    100%;
+
+  height:
+    182px;
+
+  object-fit:
+    cover;
+
+  object-position:
+    center bottom;
+
+  clip-path:
+    inset(
+      100% 0 0 0
+    );
+
+  transform:
+    translateY(
+      var(--parallax-y, 0)
+    )
+    scaleY(.2);
+
+  transform-origin: 50% 100%;
+
+  transition:
+    clip-path
+    1500ms
+    cubic-bezier(
+      .12,
+      .78,
+      .16,
+      1
+    ),
+
+    transform
+    .15s
+    linear;
+}
+
+
+.reveal.is-visible
+.program-forest {
+  clip-path:
+    inset(
+      0 0 0 0
+    );
+
+  transform:
+    translateY(
+      var(--parallax-y, 0)
+    )
+    scaleY(1);
+}
+
+
+/* =========================================================
+   DRESS CODE
+   ========================================================= */
+
+.dress-code {
+  padding:
+    29px 21px 23px;
+
+  text-align:
+    center;
+}
+
+
+.dress-code
+.script-title {
+  font-size:
+    38px;
+}
+
+
+.dress-intro {
+  width:
+    min(
+      310px,
+      90%
+    );
+
+  margin:
+    20px auto 23px;
+
+  font-size:
+    16px;
+
+  line-height:
+    1.25;
+}
+
+
+.dress-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:
+    10px;
+
+  align-items:
+    start;
+}
+
+
+.dress-column {
+  position:
+    relative;
+
+  min-width:
+    0;
+}
+
+
+.palette {
+  width:
+    146px;
+
+  height:
+    69px;
+
+  margin:
+    0 auto;
+}
+
+
+.outfit-outline {
+  margin:
+    8px auto 0;
+}
+
+
+.dress-outline {
+  width:
+    129px;
+
+  height:
+    229px;
+}
+
+
+.suit-outline {
+  width:
+    128px;
+
+  height:
+    190px;
+}
+
+
+/*
+  Постоянное очень лёгкое движение
+*/
+
+.dress-outline,
+.suit-outline {
+  transform-origin:
+    50% 90%;
+
+  animation:
+    outfit-float
+    5.5s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes outfit-float {
+
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(0deg);
+  }
+
+  50% {
+    transform:
+      translateY(-5px)
+      rotate(.5deg);
+  }
+}
+
+
+.inspiration {
+  margin:
+    14px 5px 5px 0;
+
+  color:
+    var(--blue);
+
+  font-family:
+    var(--inspiration-font);
+
+  font-size:
+    24px;
+
+  line-height:
+    1;
+
+  text-align:
+    right;
+}
+
+
+.looks {
+  display:
+    grid;
+
+  gap:
+    4px;
+
+  align-items:
+    end;
+}
+
+
+.women-looks {
+  margin-top: 12px;
+}
+
+.men-looks {
+  margin-top: 28px;
+}
+
+/* Мужские образы чуть крупнее */
+.men-looks img {
+  width: 108%;
+  max-width: none;
+  margin-left: -4%;
+  transform-origin: center bottom;
+}
+
+
+/* лёгкое живое движение */
+
+.men-looks,
+.women-looks {
+  animation:
+    looks-breathe
+    6.5s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes looks-breathe {
+
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(-2px);
+  }
+}
+
+
+.looks img {
+  opacity:
+    0;
+
+  transform:
+    translateY(20px)
+    scale(.97);
+
+  transition:
+    opacity
+    .7s
+    ease
+    var(--delay),
+
+    transform
+    .85s
+    cubic-bezier(
+      .2,
+      .8,
+      .18,
+      1
+    )
+    var(--delay);
+}
+
+
+.reveal.is-visible
+.looks img {
+  opacity:
+    1;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+
+/* =========================================================
+   GIFTS
+   ========================================================= */
+
+.gifts {
+  position:
+    relative;
+
+  min-height:
+    410px;
+
+  padding:
+    30px 35px 32px;
+
+  text-align:
+    center;
+}
+
+
+.gifts
+.script-title {
+  color:
+    var(--white);
+
+  font-size:
+    39px;
+}
+
+
+.gifts p {
+  font-size:
+    15px;
+
+  line-height:
+    1.45;
+}
+
+
+/*
+  Книги
+*/
+
+.gift-books {
+  position:
+    absolute;
+
+  top:
+    90px;
+
+  left:
+    2px;
+
+  width:
+    125px;
+
+  will-change:
+    transform;
+
+  animation:
+    decor-float-books
+    5s
+    ease-in-out
+    infinite;
+}
+
+
+/*
+  Вино
+*/
+
+.gift-wine {
+  position:
+    absolute;
+
+  top:
+    1px;
+
+  right:
+    4px;
+
+  width:
+    112px;
+
+  will-change:
+    transform;
+
+  animation:
+    decor-float-wine
+    5.5s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes decor-float-books {
+
+  0%,
+  100% {
+    transform:
+      translate3d(
+        0,
+        var(--parallax-y, 0),
+        0
+      )
+      rotate(-1deg);
+  }
+
+  50% {
+    transform:
+      translate3d(
+        0,
+        calc(
+          var(--parallax-y, 0) - 7px
+        ),
+        0
+      )
+      rotate(1deg);
+  }
+}
+
+
+@keyframes decor-float-wine {
+
+  0%,
+  100% {
+    transform:
+      translate3d(
+        0,
+        var(--parallax-y, 0),
+        0
+      )
+      rotate(0deg);
+  }
+
+  50% {
+    transform:
+      translate3d(
+        0,
+        calc(
+          var(--parallax-y, 0) - 6px
+        ),
+        0
+      )
+      rotate(1deg);
+  }
+}
+
+
+.gift-first {
+  width:
+    220px;
+
+  margin-left:
+    89px;
+
+  text-align:
+    left;
+}
+
+
+.gift-first
+.script-title {
+  margin-left:
+    -30px;
+}
+
+
+.gift-details {
+  margin-top:
+    22px;
+
+  text-align:
+    right;
+}
+
+
+.gift-details
+.script-title {
+  margin:
+    0 0 4px;
+
+  text-align:
+    right;
+}
+
+
+/* =========================================================
+   RSVP
+   ========================================================= */
+
+.rsvp {
+  padding:
+    27px 42px 34px;
+}
+
+
+.rsvp
+.script-title {
+  font-size:
+    31px;
+
+  text-align:
+    center;
+}
+
+
+.rsvp-intro {
+  margin-top:
+    11px;
+
+  font-size:
+    15px;
+
+  line-height:
+    1.28;
+
+  text-align:
+    center;
+}
+
+
+.rsvp-deadline {
+  margin:
+    12px 0 20px;
+
+  color:
+    var(--blue);
+
+  font-size:
+    20px;
+
+  text-align:
+    center;
+}
+
+
+.question {
+  display:
+    block;
+
+  padding:
+    0;
+
+  border:
+    0;
+
+  margin:
+    0 0 18px;
+
+  color:
+    #3b4c60;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.12;
+}
+
+
+.question legend {
+  margin-bottom:
+    8px;
+}
+
+
+.question > input {
+  width: 100%;
+  height: 36px;
+  margin-top: 8px;
+  padding: 0 13px;
+  border: 1px solid var(--blue);
+  border-radius: 0;
+  background: transparent;
+  color: var(--navy);
+  outline: none;
+}
+
+
+.question > input:focus {
+  box-shadow:
+    inset
+    0 0 0 1px
+    var(--navy);
+}
+
+
+.question > input::placeholder {
+  color:
+    #8a9aab;
+}
+
+
+.choice-box {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--blue);
+  background: transparent;
+}
+
+.choice-box label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 22px;
+  line-height: 1.2;
+}
+
+.choice-box label + label {
+  margin-top: 4px;
+}
+
+.choice-box input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: var(--blue);
+}
+
+
+.other-drink-field {
+  display:
+    block;
+
+  margin-top:
+    9px;
+}
+
+
+.other-drink-field[hidden] {
+  display:
+    none;
+}
+
+
+.other-drink-field span {
+  display:
+    block;
+
+  margin-bottom:
+    6px;
+}
+
+
+.other-drink-field input {
+  width:
+    100%;
+
+  height:
+    32px;
+
+  padding:
+    0 13px;
+
+  border:
+    1px solid var(--blue);
+
+  background:
+    var(--ivory);
+
+  outline:
+    none;
+}
+
+
+.submit-button {
+  display:
+    block;
+
+  width:
+    205px;
+
+  height:
+    43px;
+
+  margin:
+    28px auto 0;
+
+  border:
+    0;
+
+  color:
+    var(--white);
+
+  background:
+    var(--blue);
+
+  font-size:
+    14px;
+
+  font-weight:
+    500;
+
+  text-transform:
+    uppercase;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    opacity .25s ease;
+}
+
+
+.submit-button:hover:not(:disabled) {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 20px
+    rgba(18,47,87,.15);
+}
+
+
+.submit-button:active:not(:disabled) {
+  transform:
+    translateY(0);
+}
+
+
+.submit-button:disabled {
+  opacity:
+    .7;
+}
+
+
+.form-message {
+  min-height:
+    17px;
+
+  margin-top:
+    10px;
+
+  font-size:
+    13px;
+
+  text-align:
+    center;
+}
+
+
+.form-message.error {
+  color:
+    #9a3541;
+}
+
+
+/* =========================================================
+   CONTACTS
+   ========================================================= */
+
+.contacts {
+  display:
+    grid;
+
+  grid-template-columns:
+    131px 1fr;
+
+  min-height:
+    163px;
+
+  color:
+    var(--white);
+
+  background:
+    var(--blue);
+}
+
+
+.contacts > img {
+  width:
+    131px;
+
+  height:
+    163px;
+
+  object-fit:
+    cover;
+}
+
+
+.contacts-content {
+  padding:
+    16px 13px 10px 25px;
+}
+
+
+.contacts-content
+.script-title {
+  margin-bottom:
+    5px;
+
+  color:
+    var(--white);
+
+  font-size:
+    31px;
+
+  text-align:
+    center;
+}
+
+
+.contacts-content >
+p:not(.contact-line) {
+  margin-bottom:
+    8px;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.2;
+}
+
+
+.contact-line {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  min-height:
+    19px;
+
+  color:
+    var(--white);
+
+  font-size:
+    12px;
+
+  text-decoration:
+    none;
+}
+
+
+.contact-line img {
+  width:
+    13px;
+}
+
+
+/* =========================================================
+   COUNTDOWN
+   ========================================================= */
+
+.countdown {
+  position:
+    relative;
+
+  height:
+    440px;
+
+  color:
+    var(--white);
+
+  background:
+    #222;
+}
+
+
+.countdown > img {
+  width:
+    100%;
+
+  height:
+    440px;
+
+  object-fit:
+    cover;
+}
+
+
+.countdown-overlay {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  padding:
+    70px 14px 0;
+
+  text-align:
+    center;
+}
+
+
+.countdown
+.script-title {
+  color:
+    var(--white);
+
+  font-family:
+    var(--countdown-font);
+
+  font-size:
+    48px;
+
+  white-space:
+    nowrap;
+}
+
+
+.countdown-grid {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      65px
+    );
+
+  justify-content:
+    center;
+
+  gap:
+    12px;
+
+  margin-top:
+    40px;
+}
+
+
+.countdown-grid span,
+.countdown-grid strong,
+.countdown-grid small {
+  display:
+    block;
+}
+
+
+.countdown-grid span,
+.countdown-grid strong {
+  width:
+    65px;
+}
+
+
+.countdown-grid strong {
+  display:
+    grid;
+
+  height:
+    45px;
+
+  place-items:
+    center;
+
+  font-family:
+    var(--countdown-font);
+
+  font-size:
+    43px;
+
+  font-weight:
+    400;
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+
+.countdown-grid small {
+  margin-top:
+    7px;
+
+  font-size:
+    10px;
+
+  text-transform:
+    uppercase;
+}
+
+
+.countdown-tick {
+  animation:
+    countdown-pop
+    .52s
+    cubic-bezier(
+      .2,
+      .8,
+      .2,
+      1
+    )
+    both;
+}
+
+
+@keyframes countdown-pop {
+
+  0% {
+    opacity:
+      .5;
+
+    transform:
+      translateY(5px)
+      scale(.88);
+  }
+
+  55% {
+    opacity:
+      1;
+
+    transform:
+      translateY(-2px)
+      scale(1.06);
+  }
+
+  100% {
+    opacity:
+      1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   ENDING
+   ========================================================= */
+
+.ending {
+  min-height:
+    264px;
+
+  padding:
+    21px 20px 15px;
+
+  text-align:
+    center;
+}
+
+
+.ending > p {
+  font-size:
+    21px;
+}
+
+
+.ending
+.script-subtitle {
+  margin:
+    9px 0 18px;
+
+  font-size:
+    31px;
+}
+
+
+.ending
+.ending-names {
+  font-family:
+    var(--countdown-font);
+}
+
+
+.ending .crest {
+  width:
+    130px;
+
+  height:
+    133px;
+
+  margin:
+    0 auto;
+}
+
+
+/* =========================================================
+   MICRO MOTION — живые, но очень спокойные движения
+   ========================================================= */
+
+.cover-photo {
+  transform-origin: 50% 60%;
+  animation: cover-breathe 9s ease-in-out infinite;
+}
+
+@keyframes cover-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.018); }
+}
+
+.cover > .crest {
+  animation: crest-float 7s ease-in-out infinite;
+}
+
+@keyframes crest-float {
+  0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  50% { transform: translateX(-50%) translateY(-3px) rotate(.35deg); }
+}
+
+.venue {
+  animation: venue-float 7s ease-in-out infinite;
+}
+
+@keyframes venue-float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-4px); }
+}
+
+.program-item img {
+  will-change: transform;
+}
+
+.program-item:nth-child(1) img,
+.program-item:nth-child(2) img,
+.program-final img {
+  animation: none;
+}
+
+@keyframes decor-sway-left {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(2px) rotate(-1deg); }
+}
+
+@keyframes decor-sway-right {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(-2px) rotate(1deg); }
+}
+
+.countdown-photo {
+  transform-origin: 50% 55%;
+}
+
+.countdown:hover .countdown-photo {
+  transform: scale(1.015);
+}
+
+.outline-button,
+.submit-button {
+  transition:
+    transform .25s ease,
+    background-color .25s ease,
+    color .25s ease,
+    box-shadow .25s ease;
+}
+
+.outline-button:hover,
+.outline-button:focus-visible {
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 7px 18px rgba(18,47,87,.12);
+}
+
+.submit-button:hover,
+.submit-button:focus-visible {
+  transform: translateY(-2px);
+}
+
+@media (hover: none) {
+  .outline-button:active,
+  .submit-button:active {
+    transform: translateY(1px);
+  }
+
+  .outline-button:active {
+    transform: translateX(-50%) translateY(1px);
+  }
+}
+
+/* =========================================================
+   UNIVERSAL REVEAL
+   ========================================================= */
+
+.motion-item {
+  opacity:
+    0;
+
+  transform:
+    translate3d(
+      0,
+      24px,
+      0
+    );
+
+  transition:
+    opacity
+    .8s
+    cubic-bezier(
+      .22,
+      .72,
+      .2,
+      1
+    )
+    var(--delay),
+
+    transform
+    .95s
+    cubic-bezier(
+      .22,
+      .72,
+      .2,
+      1
+    )
+    var(--delay);
+
+  will-change:
+    opacity,
+    transform;
+}
+
+
+.reveal.is-visible
+.motion-item {
+  opacity:
+    1;
+
+  transform:
+    translate3d(
+      0,
+      0,
+      0
+    );
+}
+
+/* Заголовок программы позиционируется через translateX(-50%),
+   поэтому общий reveal не должен сбрасывать это позиционирование. */
+.program-title.motion-item {
+  transform: translateX(-50%) translateY(24px);
+}
+
+.reveal.is-visible .program-title.motion-item {
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* =========================================================
+   DATE — отдельно день / число / месяц
+   ========================================================= */
+
+.date-line
+span:first-child {
+  opacity:
+    0;
+
+  transform:
+    translateX(-28px);
+}
+
+
+.date-line strong {
+  opacity:
+    0;
+
+  transform:
+    translateX(-50%)
+    translateY(-25px)
+    scale(.88);
+}
+
+
+.date-line
+span:last-child {
+  opacity:
+    0;
+
+  transform:
+    translateX(28px);
+}
+
+
+.reveal.is-visible
+.date-line
+span:first-child,
+.reveal.is-visible
+.date-line
+span:last-child {
+  opacity:
+    1;
+
+  transform:
+    translateX(0);
+
+  transition:
+    opacity
+    .8s
+    ease
+    .05s,
+
+    transform
+    .9s
+    cubic-bezier(
+      .2,
+      .8,
+      .18,
+      1
+    )
+    .05s;
+}
+
+
+.reveal.is-visible
+.date-line strong {
+  opacity:
+    1;
+
+  transform:
+    translateX(-50%)
+    translateY(0)
+    scale(1);
+
+  transition:
+    opacity
+    .8s
+    ease
+    .18s,
+
+    transform
+    .95s
+    cubic-bezier(
+      .2,
+      .8,
+      .18,
+      1
+    )
+    .18s;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+
+/*
+  Маленькие телефоны
+*/
+
+@media (max-width: 359px) {
+
+  .welcome {
+    padding-left:
+      28px;
+
+    padding-right:
+      28px;
+  }
+
+  .welcome
+  .script-title {
+    font-size:
+      42px;
+  }
+
+  .program-item h3 {
+    font-size:
+      27px;
+  }
+
+  .rsvp {
+    padding-left:
+      28px;
+
+    padding-right:
+      28px;
+  }
+
+  .contact-line {
+    font-size:
+      10px;
+  }
+
+}
+
+
+/*
+  360–389
+*/
+
+@media (
+  min-width: 360px
+) and (
+  max-width: 389px
+) {
+
+  .invitation {
+    width:
+      100%;
+  }
+
+  .cover {
+    height:
+      184.6vw;
+  }
+
+  .cover-photo-wrap {
+    top:
+      70.3vw;
+
+    height:
+      114.4vw;
+  }
+
+  .cover-photo {
+    height:
+      114.4vw;
+
+    object-fit:
+      cover;
+  }
+
+  .cover > .crest {
+    top:
+      2%;
+
+    width:
+      33%;
+
+    height:
+      auto;
+  }
+
+  .cover-lead {
+    top:
+      25%;
+
+    width:
+      58%;
+
+    font-size:
+      clamp(
+        15px,
+        4.5vw,
+        18px
+      );
+  }
+
+  .cover-name {
+    font-size:
+      clamp(
+        39px,
+        12.3vw,
+        48px
+      );
+  }
+
+  .cover-name-groom {
+    top:
+      4%;
+  }
+
+  .cover-amp {
+    top:
+      18%;
+
+    font-size:
+      clamp(
+        27px,
+        8vw,
+        32px
+      );
+  }
+
+  .cover-name-bride {
+    top:
+      25%;
+  }
+
+  .date-location {
+    min-height:
+      145vw;
+  }
+
+  .venue {
+    width:
+      74%;
+
+    height:
+      auto;
+
+    top:
+      52%;
+  }
+
+  .outline-button {
+    top:
+      86%;
+
+    width:
+      54%;
+  }
+
+  .program {
+    height:
+      192vw;
+
+    min-height:
+      690px;
+  }
+
+  .program-title {
+    top:
+      10vw;
+
+    width:
+      88%;
+
+    font-size:
+      clamp(
+        27px,
+        8vw,
+        32px
+      );
+  }
+
+  .program-item {
+    grid-template-columns:
+      23% 1fr;
+
+    column-gap:
+      5%;
+  }
+
+  .program-forest {
+    height:
+      48vw;
+
+    min-height:
+      150px;
+  }
+
+  .dress-code {
+    padding-left:
+      5%;
+
+    padding-right:
+      5%;
+  }
+
+  .palette {
+    width:
+      39vw;
+
+    height:
+      auto;
+  }
+
+  .dress-outline,
+  .suit-outline {
+    width:
+      33vw;
+
+    height:
+      auto;
+  }
+
+  .women-looks {
+    margin-top: 10px;
+  }
+
+  .men-looks {
+    margin-top: 22px;
+  }
+
+  .gifts {
+    padding-left:
+      9%;
+
+    padding-right:
+      9%;
+  }
+
+  .gift-first {
+    width:
+      61%;
+
+    margin-left:
+      25%;
+  }
+
+  .gift-books {
+    width:
+      30vw;
+
+    left:
+      1vw;
+  }
+
+  .gift-wine {
+    width:
+      27vw;
+
+    right:
+      1vw;
+  }
+
+  .rsvp {
+    padding-left:
+      8%;
+
+    padding-right:
+      8%;
+  }
+
+  .contacts {
+    grid-template-columns:
+      33.5% 66.5%;
+  }
+
+  .contacts > img {
+    width:
+      100%;
+
+    height:
+      auto;
+  }
+
+  .contacts-content {
+    padding-left:
+      5vw;
+
+    padding-right:
+      3vw;
+  }
+
+  .countdown
+  .script-title {
+    font-size:
+      12vw;
+  }
+
+  .countdown-grid {
+    grid-template-columns:
+      repeat(
+        4,
+        16vw
+      );
+
+    gap:
+      2vw;
+  }
+
+  .countdown-grid span,
+  .countdown-grid strong {
+    width:
+      16vw;
+  }
+
+  .countdown-grid strong {
+    font-size:
+      10vw;
+  }
+}
+
+
+/*
+  Нормальные современные телефоны
+*/
+
+@media (
+  min-width: 390px
+) and (
+  max-width: 430px
+) {
+
+  .invitation {
+    width:
+      100%;
+  }
+
+  .cover {
+    width:
+      100%;
+
+    height:
+      184.6vw;
+  }
+
+  .cover-photo-wrap {
+    top:
+      70.3vw;
+
+    height:
+      114.4vw;
+  }
+
+  .cover-photo {
+    width:
+      100%;
+
+    height:
+      114.4vw;
+
+    object-fit:
+      cover;
+  }
+
+  .program {
+    height:
+      192vw;
+  }
+
+  .program-title {
+    width:
+      88%;
+
+    font-size:
+      clamp(
+        29px,
+        7.8vw,
+        34px
+      );
+  }
+
+  .gift-books {
+    width:
+      30vw;
+
+    left:
+      1vw;
+  }
+
+  .gift-wine {
+    width:
+      27vw;
+
+    right:
+      1vw;
+  }
+}
+
+
+/*
+  Планшет / desktop
+  Само приглашение остаётся
+  в свадебном мобильном формате,
+  но центрируется.
+*/
+
+@media (min-width: 700px) {
+
+  body {
+    padding:
+      30px 0;
+  }
+
+  .invitation {
+    width:
+      390px;
+
+    margin:
+      0 auto;
+
+    border-radius:
+      2px;
+  }
+}
+
+
+@media (min-width: 1100px) {
+
+  body {
+    padding:
+      40px 0;
+  }
+
+  .invitation {
+    width:
+      390px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE POLISH
+   ========================================================= */
+
+@media (max-width: 430px) {
+  .program-title {
+    top: 36px;
+    left: 50%;
+    width: 88%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 27px;
+    line-height: 1.18;
+    overflow-wrap: normal;
+  }
+
+  .program-list {
+    top: 192px;
+    left: 9%;
+    right: 7%;
+  }
+
+  .program-forest {
+    transform-origin: 50% 100%;
+  }
+
+  .invitation {
+    box-shadow: none;
+  }
+
+  .cover-photo {
+    animation-duration: 11s;
+  }
+
+  .welcome p,
+  .location-copy,
+  .dress-intro,
+  .rsvp-intro,
+  .gifts p {
+    text-wrap: pretty;
+  }
+
+  .program-item h3 {
+    text-wrap: balance;
+  }
+
+  .question > input {
+    height: 38px;
+    min-height: 38px;
+  }
+
+  .choice-box {
+    padding: 8px 12px;
+  }
+
+  .choice-box label {
+    min-height: 24px;
+  }
+
+  .countdown {
+    min-height: 430px;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 699px) {
+  .invitation {
+    width: min(390px, calc(100vw - 32px));
+  }
+}
+
+/* =========================================================
+   OTHER DRINK FIELD
+   ========================================================= */
+
+.other-drink-field {
+  animation:
+    other-field-in
+    .2s
+    ease
+    both;
+}
+
+
+@keyframes other-field-in {
+
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(-4px);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior:
+      auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration:
+      .001ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      .001ms !important;
+  }
+
+  .motion-item,
+  .cover-motion,
+  .program-item img,
+  .program-item div,
+  .program-forest,
+  .looks img {
+    opacity:
+      1 !important;
+
+    transform:
+      none !important;
+
+    clip-path:
+      none !important;
+  }
+}
